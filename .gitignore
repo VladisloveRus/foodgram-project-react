@@ -132,4 +132,4 @@ dmypy.json
 .idea
 
 requests.http
-media
+backend/media
