@@ -3,7 +3,8 @@ from django.urls import path, include
 from djoser.views import TokenCreateView, UserViewSet, TokenDestroyView
 from users import views
 from rest_framework.routers import SimpleRouter
-users_router = SimpleRouter() 
+
+users_router = SimpleRouter()
 
 users_router.register('users', views.UserViewSet)
 

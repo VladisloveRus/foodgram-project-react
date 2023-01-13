@@ -7,10 +7,18 @@ from django.contrib.auth import get_user_model
 
 
 class CustomUser(AbstractUser):
-    email = models.EmailField('email', null=False, blank=False, unique=True, max_length = 254)
-    username = models.CharField('username', null=False, blank=False, max_length = 150, unique=True)
-    first_name = models.CharField('first_name', null=False, blank=False, max_length = 150)
-    last_name = models.CharField('last_name', null=False, blank=False, max_length = 150)
+    email = models.EmailField(
+        'email', null=False, blank=False, unique=True, max_length=254
+    )
+    username = models.CharField(
+        'username', null=False, blank=False, max_length=150, unique=True
+    )
+    first_name = models.CharField(
+        'first_name', null=False, blank=False, max_length=150
+    )
+    last_name = models.CharField(
+        'last_name', null=False, blank=False, max_length=150
+    )
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
 
@@ -42,7 +50,10 @@ class Follow(models.Model):
     )
 
     class Meta:
+        ordering = ['pk']
         verbose_name = 'Подписки'
         constraints = [
-            UniqueConstraint(fields=['following', 'user'], name='unique_follow')
+            UniqueConstraint(
+                fields=['following', 'user'], name='unique_follow'
+            )
         ]

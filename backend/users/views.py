@@ -27,7 +27,7 @@ class UserViewSet(ModelViewSet):
     )
     def me(self, request):
         user = get_object_or_404(User, pk=request.user.pk)
-        serializer = CustomUserSerializer(user)
+        serializer = CustomUserSerializer(user, context={'request': request})
         return Response(serializer.data)
 
     @action(
@@ -38,9 +38,12 @@ class UserViewSet(ModelViewSet):
         url_path='subscriptions',
     )
     def subscriptions(self, request):
-        follow = get_object_or_404(Follow, user=request.user.pk)
-        serializer = FollowSerializer(follow)
-        return Response(serializer.data)
+        queryset = Follow.objects.filter(user=request.user)
+        pages = self.paginate_queryset(queryset)
+        serializer = FollowSerializer(
+            pages, many=True, context={'request': request}
+        )
+        return self.get_paginated_response(serializer.data)
 
     @action(
         methods=[

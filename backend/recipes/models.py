@@ -79,7 +79,7 @@ class Favorite(models.Model):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='favorite_user',
+        related_name='favorite',
         verbose_name='Пользователь',
     )
     recipe = models.ForeignKey(
@@ -124,27 +124,32 @@ class ShoppingCart(models.Model):
 
 
 class IngredientAmount(models.Model):
-    
+
     ingredient = models.ForeignKey(
         Ingredient,
         on_delete=models.CASCADE,
-        related_name='ingredient_amount',
+        related_name='amount',
         verbose_name='Ингредиент',
     )
     recipe = models.ForeignKey(
         Recipe,
         on_delete=models.CASCADE,
-        related_name='ingredient_amount',
+        related_name='amount',
         verbose_name='Рецепт',
     )
     amount = models.PositiveSmallIntegerField(
         validators=[MinValueValidator(1)],
         verbose_name='Количество',
     )
+
     class Meta:
         verbose_name = 'Количество'
         constraints = [
             models.UniqueConstraint(
-                fields=['ingredient', 'recipe'], name='unique_ingredient_amount'
+                fields=['ingredient', 'recipe'],
+                name='unique_ingredient_amount',
             )
         ]
+
+    def __str__(self):
+        return self.amount
