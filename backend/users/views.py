@@ -1,22 +1,26 @@
-from django.shortcuts import render, get_object_or_404
-from rest_framework.decorators import api_view, action
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework import status
-from rest_framework import permissions
-from .serializers import CustomUserSerializer, FollowSerializer
-from .models import Follow
 from django.contrib.auth import get_user_model
-from rest_framework import generics
-from rest_framework.viewsets import ReadOnlyModelViewSet, ModelViewSet
+from django.shortcuts import get_object_or_404
+from recipes.permissions import ReadOnly
+from rest_framework import permissions, status
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet
+
+from .models import Follow
+from .serializers import CustomUserSerializer, FollowSerializer
 
 User = get_user_model()
 
 
-class UserViewSet(ModelViewSet):
+class CustomUserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = CustomUserSerializer
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+    def get_permissions(self):
+        if self.action == 'retrieve':
+            return (ReadOnly(),)
+        return super().get_permissions()
 
     @action(
         methods=[

@@ -1,6 +1,6 @@
-from django.db import models
 from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator
+from django.db import models
 
 User = get_user_model()
 
@@ -72,7 +72,7 @@ class Recipe(models.Model):
         verbose_name_plural = 'Рецепты'
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 
 class Favorite(models.Model):
@@ -124,7 +124,6 @@ class ShoppingCart(models.Model):
 
 
 class IngredientAmount(models.Model):
-
     ingredient = models.ForeignKey(
         Ingredient,
         on_delete=models.CASCADE,
@@ -150,6 +149,3 @@ class IngredientAmount(models.Model):
                 name='unique_ingredient_amount',
             )
         ]
-
-    def __str__(self):
-        return self.amount

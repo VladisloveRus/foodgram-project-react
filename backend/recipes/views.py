@@ -1,38 +1,41 @@
-from django.shortcuts import render, get_object_or_404, HttpResponse
-from rest_framework import permissions, filters
-from rest_framework.viewsets import ReadOnlyModelViewSet, ModelViewSet
+from django.contrib.auth import get_user_model
+from django.shortcuts import HttpResponse, get_object_or_404
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import permissions, status
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
+
+from .filters import IngredientFilter, RecipeFilter
 from .models import (
-    Tag,
-    Recipe,
     Favorite,
-    ShoppingCart,
     Ingredient,
     IngredientAmount,
+    Recipe,
+    ShoppingCart,
+    Tag,
 )
-from .permissions import OwnerOrReadOnly, ReadOnly
+from .permissions import AuthorOrReadOnly, ReadOnly
 from .serializers import (
-    TagSerializer,
-    RecipeSerializer,
-    RecipeListSerializer,
     FavoriteSerializer,
-    ShoppingCartSerializer,
-    IngredientListSerializer,
     IngredientForViewSerializer,
+    RecipeListSerializer,
+    RecipeSerializer,
+    ShoppingCartSerializer,
+    TagSerializer,
 )
-from rest_framework import generics, status, mixins
-from rest_framework.response import Response
-from rest_framework.decorators import api_view, action
-from rest_framework.views import APIView
-from django_filters.rest_framework import DjangoFilterBackend
+
+User = get_user_model()
 
 
 class IngredientViewSet(ReadOnlyModelViewSet):
-    permission_classes = (ReadOnly,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = Ingredient.objects.all()
     serializer_class = IngredientForViewSerializer
     pagination_class = None
-    filter_backends = (filters.SearchFilter,)
-    search_fields = ('^ingredient__name',)
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = IngredientFilter
 
 
 class TagViewSet(ReadOnlyModelViewSet):
@@ -43,16 +46,11 @@ class TagViewSet(ReadOnlyModelViewSet):
 
 
 class RecipeViewSet(ModelViewSet):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
-    filter_backends = (DjangoFilterBackend,)
-    filterset_fields = ('tags__slug',)
-    #    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    #
-    #    def get_permissions(self):
-    #        if self.action == 'retrieve':
-    #            return (OwnerOrReadOnly(),)
-    #        return super().get_permissions()
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = RecipeFilter
 
     def get_serializer_class(self):
         if self.action in ('list', 'retrieve'):
@@ -66,7 +64,6 @@ class RecipeViewSet(ModelViewSet):
         ],
         detail=True,
         url_path='favorite',
-        permission_classes=(OwnerOrReadOnly,),
     )
     def favorite(self, request, pk):
         user = request.user
@@ -112,7 +109,7 @@ class RecipeViewSet(ModelViewSet):
 
 
 class DownloadShoppingCartView(APIView):
-    permission_classes = (OwnerOrReadOnly,)
+    permission_classes = (AuthorOrReadOnly,)
 
     def get(self, request):
         shopping_cart = ShoppingCart.objects.filter(user=request.user)

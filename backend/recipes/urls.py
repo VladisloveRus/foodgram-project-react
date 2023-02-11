@@ -1,7 +1,7 @@
-from django.contrib import admin
-from django.urls import path, include
-from recipes import views
+from django.urls import include, path
 from rest_framework.routers import SimpleRouter
+
+from recipes import views
 
 recipes_router = SimpleRouter()
 recipes_router.register('ingredients', views.IngredientViewSet)

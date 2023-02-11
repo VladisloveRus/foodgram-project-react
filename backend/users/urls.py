@@ -1,12 +1,13 @@
 from django.contrib import admin
-from django.urls import path, include
-from djoser.views import TokenCreateView, UserViewSet, TokenDestroyView
-from users import views
+from django.urls import include, path
+from djoser.views import TokenCreateView, TokenDestroyView, UserViewSet
 from rest_framework.routers import SimpleRouter
+
+from users import views
 
 users_router = SimpleRouter()
 
-users_router.register('users', views.UserViewSet)
+users_router.register('users', views.CustomUserViewSet)
 
 urlpatterns = [
     path('auth/token/login/', TokenCreateView.as_view(), name='login'),
