@@ -3,9 +3,9 @@ from datetime import timedelta
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = '!ny5%g^$q=6)iah3j)z(&p1=h4sc53cqg8-7rkd=kph72y2&5*'
+SECRET_KEY = os.getenv('SECRET_KEY', default='11111111111111111111111111111111111111111111111111'),
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'web']
 
