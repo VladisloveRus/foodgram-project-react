@@ -35,3 +35,8 @@ python manage.py add_ingredients
 ```sh
 python manage.py createsuperuser
 ```
+
+
+## Авторы проекта
+- Frontend [Яндекс.Практикум](https://practicum.yandex.ru/ "Яндекс.Практикум")
+- Backend [VladisloveRus](https://github.com/VladisloveRus "Владислав Черепанов")
