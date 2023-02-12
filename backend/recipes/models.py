@@ -1,3 +1,4 @@
+from colorfield.fields import ColorField
 from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator
 from django.db import models
@@ -7,8 +8,8 @@ User = get_user_model()
 
 class Tag(models.Model):
     name = models.CharField('Название тега', max_length=200)
-    color = models.CharField('Цветовой HEX-код', max_length=7)
-    slug = models.SlugField('Адрес', unique=True, max_length=200)
+    color = ColorField('Цветовой HEX-код', default='#FF0000')
+    slug = models.SlugField('Адрес', unique=True)
 
     class Meta:
         ordering = ['name']
