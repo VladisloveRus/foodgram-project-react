@@ -53,6 +53,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/foodgram-project-react:latest
             sudo docker-compose stop
             sudo docker-compose rm web
             rm -f .env
@@ -67,6 +68,7 @@ jobs:
             sudo docker-compose exec -T web python manage.py makemigrations --no-input
             sudo docker-compose exec -T web python manage.py migrate --no-input
             sudo docker-compose exec -T web python manage.py collectstatic --no-input
+            sudo docker-compose exec -T web python manage.py add_ingredients
             sudo docker-compose up -d
   send_message:
     runs-on: ubuntu-latest
