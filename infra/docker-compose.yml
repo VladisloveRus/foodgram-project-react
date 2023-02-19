@@ -17,11 +17,11 @@ services:
     env_file:
       - ./.env 
   frontend:
-    build:
-      context: ../frontend
-      dockerfile: Dockerfile
+    image: vladisloverus/foodgram_frontend:latest
     volumes:
       - ../frontend/:/app/result_build/
+    depends_on:
+      - db
   nginx:
     image: nginx:1.19.3
     ports:
@@ -34,6 +34,7 @@ services:
       - ../docs/:/usr/share/nginx/html/api/docs/
     depends_on:
       - web
+      - frontend
       
 volumes:
   static_value:
