@@ -7,7 +7,7 @@ services:
     env_file:
       - ./.env
   web:
-    build: ../.
+    image: vladisloverus/foodgram-project-react:latest
     restart: always
     volumes:
       - static_value:/app/static_backend/
