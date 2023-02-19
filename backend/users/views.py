@@ -17,10 +17,10 @@ class CustomUserViewSet(ModelViewSet):
     serializer_class = CustomUserSerializer
     permission_classes = (permissions.AllowAny,)
 
-    def get_permissions(self):
-        if self.action == 'retrieve':
-            return (ReadOnly(),)
-        return super().get_permissions()
+#    def get_permissions(self):
+#        if self.action == 'retrieve':
+#            return (ReadOnly(),)
+#        return super().get_permissions()
 
     @action(
         methods=[
