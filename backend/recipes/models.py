@@ -12,7 +12,7 @@ class Tag(models.Model):
     slug = models.SlugField('Адрес', unique=True)
 
     class Meta:
-        ordering = ['name']
+        ordering = ('name',)
         verbose_name = 'Тег'
         verbose_name_plural = 'Теги'
 
@@ -25,7 +25,7 @@ class Ingredient(models.Model):
     measurement_unit = models.CharField('Единицы измерения', max_length=100)
 
     class Meta:
-        ordering = ['name']
+        ordering = ('name',)
         verbose_name = 'Ингредиент'
         verbose_name_plural = 'Ингредиенты'
 
@@ -64,16 +64,16 @@ class Recipe(models.Model):
         verbose_name='Тег',
     )
     cooking_time = models.PositiveIntegerField(
-        validators=[
+        validators=(
             MinValueValidator(
                 1, 'Время приготовления не может быть менее минуты'
             ),
-        ],
+        ),
         verbose_name='Время приготовления в минутах',
     )
 
     class Meta:
-        ordering = ['-pk']
+        ordering = ('-pk',)
         verbose_name = 'Рецепт'
         verbose_name_plural = 'Рецепты'
 
@@ -98,11 +98,11 @@ class Favorite(models.Model):
     class Meta:
         verbose_name = 'Избранное'
         verbose_name_plural = 'Избранное'
-        constraints = [
+        constraints = (
             models.UniqueConstraint(
-                fields=['user', 'recipe'], name='unique_favorite'
-            )
-        ]
+                fields=('user', 'recipe'), name='unique_favorite'
+            ),
+        )
 
 
 class ShoppingCart(models.Model):
@@ -122,11 +122,11 @@ class ShoppingCart(models.Model):
     class Meta:
         verbose_name = 'Список покупок'
         verbose_name_plural = 'Списки покупок'
-        constraints = [
+        constraints = (
             models.UniqueConstraint(
-                fields=['user', 'recipe'], name='unique_shoping_cart'
-            )
-        ]
+                fields=('user', 'recipe'), name='unique_shoping_cart'
+            ),
+        )
 
 
 class IngredientAmount(models.Model):
@@ -143,17 +143,17 @@ class IngredientAmount(models.Model):
         verbose_name='Рецепт',
     )
     amount = models.PositiveSmallIntegerField(
-        validators=[
+        validators=(
             MinValueValidator(1, 'Количество не может быть меньше 1'),
-        ],
+        ),
         verbose_name='Количество',
     )
 
     class Meta:
         verbose_name = 'Количество'
-        constraints = [
+        constraints = (
             models.UniqueConstraint(
-                fields=['ingredient', 'recipe'],
+                fields=('ingredient', 'recipe'),
                 name='unique_ingredient_amount',
-            )
-        ]
+            ),
+        )

@@ -8,23 +8,12 @@ from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 
 from .filters import IngredientFilter, RecipeFilter
-from .models import (
-    Favorite,
-    Ingredient,
-    IngredientAmount,
-    Recipe,
-    ShoppingCart,
-    Tag,
-)
+from .models import (Favorite, Ingredient, IngredientAmount, Recipe,
+                     ShoppingCart, Tag)
 from .permissions import AuthorOrReadOnly, ReadOnly
-from .serializers import (
-    FavoriteSerializer,
-    IngredientForViewSerializer,
-    RecipeListSerializer,
-    RecipeSerializer,
-    ShoppingCartSerializer,
-    TagSerializer,
-)
+from .serializers import (FavoriteSerializer, IngredientForViewSerializer,
+                          RecipeListSerializer, RecipeSerializer,
+                          ShoppingCartSerializer, TagSerializer)
 
 User = get_user_model()
 

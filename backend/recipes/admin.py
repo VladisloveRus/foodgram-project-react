@@ -1,14 +1,8 @@
+from backend.settings import EMPTY_VALUE_DISPLAY as EVD
 from django.contrib import admin
 
-from .models import (
-    Favorite,
-    Ingredient,
-    IngredientAmount,
-    Recipe,
-    ShoppingCart,
-    Tag,
-)
-from backend.settings import EMPTY_VALUE_DISPLAY as EVD
+from .models import (Favorite, Ingredient, IngredientAmount, Recipe,
+                     ShoppingCart, Tag)
 
 
 @admin.register(Tag)
