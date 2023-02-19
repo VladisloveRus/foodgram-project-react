@@ -1,16 +1,14 @@
 from django.contrib.auth import get_user_model
-from django.shortcuts import HttpResponse, get_object_or_404
+from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import permissions, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 
 from .filters import IngredientFilter, RecipeFilter
-from .models import (Favorite, Ingredient, IngredientAmount, Recipe,
-                     ShoppingCart, Tag)
-from .permissions import AuthorOrReadOnly, ReadOnly
+from .models import Favorite, Ingredient, Recipe, ShoppingCart, Tag
+from .permissions import ReadOnly
 from .serializers import (FavoriteSerializer, IngredientForViewSerializer,
                           RecipeListSerializer, RecipeSerializer,
                           ShoppingCartSerializer, TagSerializer)

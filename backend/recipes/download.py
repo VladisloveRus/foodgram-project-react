@@ -54,14 +54,13 @@ class DownloadShoppingCartView(APIView):
                 + str(ingredient_amount_dict[ingregient])
                 + ' '
                 + amount[count]
-                + f'\n'
+                + '\n'
             )
             count += 1
-        response = HttpResponse(
+        return HttpResponse(
             lines,
             headers={
                 'Content-Type': 'text/plain',
                 'Content-Disposition': 'attachment; filename="BuyList.txt"',
             },
         )
-        return response

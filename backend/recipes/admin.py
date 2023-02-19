@@ -1,5 +1,6 @@
-from backend.settings import EMPTY_VALUE_DISPLAY as EVD
 from django.contrib import admin
+
+from backend.settings import EMPTY_VALUE_DISPLAY as EVD
 
 from .models import (Favorite, Ingredient, IngredientAmount, Recipe,
                      ShoppingCart, Tag)

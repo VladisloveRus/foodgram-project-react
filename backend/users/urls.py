@@ -1,8 +1,6 @@
-from django.contrib import admin
 from django.urls import include, path
 from djoser.views import TokenCreateView, TokenDestroyView, UserViewSet
 from rest_framework.routers import SimpleRouter
-
 from users import views
 
 users_router = SimpleRouter()

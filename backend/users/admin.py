@@ -1,7 +1,8 @@
 from django.contrib import admin
 
-from .models import CustomUser, Follow
 from backend.settings import EMPTY_VALUE_DISPLAY as EVD
+
+from .models import CustomUser, Follow
 
 admin.site.register(CustomUser)
 

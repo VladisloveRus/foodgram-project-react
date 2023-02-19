@@ -1,7 +1,6 @@
 from django.urls import include, path
-from rest_framework.routers import SimpleRouter
-
 from recipes import download, views
+from rest_framework.routers import SimpleRouter
 
 recipes_router = SimpleRouter()
 recipes_router.register('ingredients', views.IngredientViewSet)
