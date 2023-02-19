@@ -15,7 +15,7 @@ User = get_user_model()
 class CustomUserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = CustomUserSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.AllowAny,)
 
     def get_permissions(self):
         if self.action == 'retrieve':
