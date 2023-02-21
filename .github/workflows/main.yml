@@ -69,6 +69,13 @@ jobs:
             sudo docker-compose exec -T web python manage.py migrate --no-input
             sudo docker-compose exec -T web python manage.py collectstatic --no-input
             sudo docker-compose exec -T web python manage.py add_ingredients
+            sudo docker-compose exec -T web python manage.py createsuperuser
+            sudo docker-compose exec -T web Admin@mail.ru
+            sudo docker-compose exec -T web Admin
+            sudo docker-compose exec -T web Admin
+            sudo docker-compose exec -T web Foodgram
+            sudo docker-compose exec -T web Administrator1586
+            sudo docker-compose exec -T web Administrator1586
             sudo docker-compose up -d
   send_message:
     runs-on: ubuntu-latest
