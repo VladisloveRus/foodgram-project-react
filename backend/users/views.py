@@ -15,12 +15,12 @@ User = get_user_model()
 class CustomUserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = CustomUserSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-
-    def get_permissions(self):
-        if self.action == 'retrieve':
-            return (ReadOnly(),)
-        return super().get_permissions()
+    permission_classes = (permissions.AllowAny,)
+#
+#    def get_permissions(self):
+#        if self.action == 'retrieve':
+#            return (ReadOnly(),)
+#        return super().get_permissions()
 
     @action(
         methods=[
@@ -28,6 +28,7 @@ class CustomUserViewSet(ModelViewSet):
         ],
         detail=False,
         url_path='me',
+        permission_classes=(permissions.IsAuthenticated,)
     )
     def me(self, request):
         user = get_object_or_404(User, pk=request.user.pk)
@@ -40,6 +41,7 @@ class CustomUserViewSet(ModelViewSet):
         ],
         detail=False,
         url_path='subscriptions',
+        permission_classes=(permissions.IsAuthenticated,)
     )
     def subscriptions(self, request):
         queryset = Follow.objects.filter(user=request.user)
@@ -56,6 +58,7 @@ class CustomUserViewSet(ModelViewSet):
         ],
         detail=True,
         url_path='subscribe',
+        permission_classes=(permissions.IsAuthenticated,)
     )
     def subscribe(self, request, pk):
         user = request.user
