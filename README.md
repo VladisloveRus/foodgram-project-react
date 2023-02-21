@@ -36,7 +36,7 @@ python manage.py add_ingredients
 python manage.py createsuperuser
 ```
 
-## Сервер запущен по адресу [wolfi.onthewifi.com](https://wolfi.onthewifi.com/ "wolfi.onthewifi.com")
+## Сервер запущен по адресу [wolfi.onthewifi.com](http://wolfi.onthewifi.com/ "wolfi.onthewifi.com")
 - Данные для входа в панель администратора
 ```sh
 E-mail: Admin@mail.ru
