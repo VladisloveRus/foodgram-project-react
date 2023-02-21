@@ -22,7 +22,6 @@ class CustomUserViewSet(ModelViewSet):
         ],
         detail=False,
         url_path='me',
-        permission_classes=(permissions.IsAuthenticated,),
     )
     def me(self, request):
         user = get_object_or_404(User, pk=request.user.pk)

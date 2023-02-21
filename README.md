@@ -45,4 +45,4 @@ Password: Administrator1586
 
 ## Авторы проекта
 - Frontend [Яндекс.Практикум](https://practicum.yandex.ru/ "Яндекс.Практикум")
-- Backend [VladisloveRus](https://github.com/VladisloveRus "Владислав Черепанов")
+- Backend [VladisloveRus](https://github.com/VladisloveRus/ "Владислав Черепанов")
