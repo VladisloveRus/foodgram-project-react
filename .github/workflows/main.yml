@@ -66,11 +66,11 @@ jobs:
             echo DB_PORT=${{ secrets.DB_PORT }} >> .env
             echo ALLOWED_HOSTS=${{ secrets.ALLOWED_HOSTS }} >> .env
             sudo docker-compose up -d
-  createsuperuser:
+  migrations:
     runs-on: ubuntu-latest
     needs: deploy
     steps:
-      - name: executing remote ssh commands to createsuperuser
+      - name: executing remote ssh commands to create migrations, collect static etc.
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
@@ -82,13 +82,6 @@ jobs:
             sudo docker-compose exec -T web python manage.py migrate --no-input
             sudo docker-compose exec -T web python manage.py collectstatic --no-input
             sudo docker-compose exec -T web python manage.py add_ingredients
-            sudo docker-compose exec -T web python manage.py createsuperuser
-            sudo docker-compose exec -T web Admin@mail.ru
-            sudo docker-compose exec -T web Admin
-            sudo docker-compose exec -T web Admin
-            sudo docker-compose exec -T web Foodgram
-            sudo docker-compose exec -T web Administrator1586
-            sudo docker-compose exec -T web Administrator1586
   send_message:
     runs-on: ubuntu-latest
     needs: deploy
