@@ -34,7 +34,6 @@ class CustomUserViewSet(ModelViewSet):
         ],
         detail=False,
         url_path='subscriptions',
-        permission_classes=(permissions.IsAuthenticated,),
     )
     def subscriptions(self, request):
         queryset = Follow.objects.filter(user=request.user)
@@ -51,7 +50,6 @@ class CustomUserViewSet(ModelViewSet):
         ],
         detail=True,
         url_path='subscribe',
-        permission_classes=(permissions.IsAuthenticated,),
     )
     def subscribe(self, request, pk):
         user = request.user
