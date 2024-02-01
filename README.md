@@ -53,6 +53,7 @@ python manage.py createsuperuser
 E-mail: Admin@mail.ru
 Password: Administrator1586
 ```
+(upd. 01.02.2024: Сервер более недоступен)
 
 ## Авторы проекта
 - Frontend [Яндекс.Практикум](https://practicum.yandex.ru/ "Яндекс.Практикум")
