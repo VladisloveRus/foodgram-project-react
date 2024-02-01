@@ -19,6 +19,17 @@ git clone https://github.com/VladisloveRus/foodgram-project-react
 python -m venv venv
 pip install -r requirements.txt 
 ```
+- Создайте файл .env директории infra и заполните его по примеру:
+```sh
+DB_ENGINE=django.db.backends.postgresql
+DB_NAME=[ИМЯ БД]
+POSTGRES_USER=[ПОЛЬЗОВАТЕЛЬ БД]
+POSTGRES_PASSWORD=[ПАРОЛЬ БД]
+DB_HOST=db
+DB_PORT=5432
+SECRET_KEY=[СЕКРЕТНЫЙ КЛЮЧ]
+ALLOWED_HOSTS= web localhost 127.0.0.1 [ВАШ ХОСТ]
+```
 - Выполните следующие команды:
 ```sh
 cd infra
