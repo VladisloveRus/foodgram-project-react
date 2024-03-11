@@ -47,13 +47,13 @@ python manage.py add_ingredients
 python manage.py createsuperuser
 ```
 
-## Сервер запущен по адресу [wolfi.onthewifi.com](http://wolfi.onthewifi.com/ "wolfi.onthewifi.com")
+## Сервер запущен по адресу [wolfi.onthewifi.com](http://wolfi.onthewifi.com/ "wolfi.onthewifi.com") 
+___(upd. 01.02.2024: Сервер более недоступен)___
 - Данные для входа в панель администратора
 ```sh
 E-mail: Admin@mail.ru
 Password: Administrator1586
 ```
-(upd. 01.02.2024: Сервер более недоступен)
 
 ## Авторы проекта
 - Frontend [Яндекс.Практикум](https://practicum.yandex.ru/ "Яндекс.Практикум")
